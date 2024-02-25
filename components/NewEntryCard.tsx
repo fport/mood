@@ -8,7 +8,7 @@ export default function NewEntryCard() {
 
   async function handleOnClick() {
     const data =await createNewEntry()
-    router.push(`/jorunal/${data.id}`)
+    // router.push(`/jorunal/${data.id}`)
   }
 
   return (

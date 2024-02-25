@@ -1,8 +1,8 @@
 /*
   Info for NLP: https://www.youtube.com/watch?v=rmVRLeJRkl4&list=PLoROMvodv4rMFqRtEuo6SGjY4XbRIVRd4
   LLM: Large Language Model
-  Nerual Network: https://www.youtube.com/watch?v=60c4rMq-aH0
-  Transformars: https://www.youtube.com/watch?v=5vcj8kSwBCY
+  Neural Network: https://www.youtube.com/watch?v=60c4rMq-aH0
+  Transformers: https://www.youtube.com/watch?v=5vcj8kSwBCY
  */
 
 import {OpenAI} from "@langchain/openai"

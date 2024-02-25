@@ -2477,6 +2477,11 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
+react-autosave@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/react-autosave/-/react-autosave-0.4.4.tgz#efb686709e9af6d1486e0448f6523708e4483786"
+  integrity sha512-BIDBBXeNWgACpDWvFt//d2wDkfnWQn4VJKEI+Fgg19zYgbfF4RGHtAucOuCCN1qs179+iwXOJcytsR+4YcSXWg==
+
 react-dom@^18:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"

@@ -47,8 +47,15 @@ model Analysis {
   entryId String
   entry   CvEntry @relation(fields: [entryId], references: [id])
 
-  score    Float
-  feedback String @db.Text
+  // score    Float
+  // feedback String @db.Text
+
+  mood           String
+  summary        String  @db.Text
+  color          String
+  negative       Boolean
+  subject        String
+  sentimentScore Float
 
   @@unique([entryId])
 }

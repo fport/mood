@@ -16,18 +16,6 @@ async function getEntries() {
     }
   })
 
-  // TODO: Remove this once we have real data
-  const propmt = `I'm going to give you an journal entry, and I want you to analyze
-   for a few things. I need the mood, a summary, what the subject is, and a color 
-   representing the mood. You need to respond back with formatted JSON like so: {"mood": "", "subject": "", "color": "", "negative": ""}.
-   
-   entry: 
-   Today was a really great day. I went to the park and played with my dog. 
-   I also got to see my friends and we had a great time. I'm really happy today.
-   `
-
-  await analyze(propmt)
-
   return entries
 }
 

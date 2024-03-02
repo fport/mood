@@ -2,15 +2,27 @@ import { getUserFromClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
+import { analyze } from '@/utils/ai'
 
 export const POST = async () => {
   const user = await getUserFromClerkID()
   const entry = await prisma.cvEntry.create({
     data: {
       userId: user.id,
-      content: 'write about your CV here'
+      content: 'Write about your day!'
     }
   })
+
+  const analysis = await analyze(entry.content)
+  
+  if(analysis) {
+    await prisma.analysis.create({
+      data: {
+        entryId: entry.id,
+        ...analysis
+      }
+    })
+  }
 
   revalidatePath('/journal')
 

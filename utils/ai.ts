@@ -8,6 +8,7 @@
 import { z } from 'zod'
 import { OpenAI } from '@langchain/openai'
 import { StructuredOutputParser } from 'langchain/output_parsers'
+import { PromptTemplate } from 'langchain/prompts'
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -18,13 +19,13 @@ const parser = StructuredOutputParser.fromZodSchema(
     negative: z
       .boolean()
       .describe(
-        'is the journal entry negative? (i.e. does it contain negative emotions?).'
+        'is the journal entry negative? (i.e. does it contlin negative emotions?).'
       ),
     summary: z.string().describe('quick summary of the entire entry.'),
     color: z
       .string()
       .describe(
-        'a hexidecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness.'
+        'a hexadecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness.'
       ),
     sentimentScore: z
       .number()
@@ -34,6 +35,23 @@ const parser = StructuredOutputParser.fromZodSchema(
   })
 )
 
+const getPrompt = async (content: string) => {
+  const format_instructions = parser.getFormatInstructions()
+
+  const prompt = new PromptTemplate({
+    template:
+      'Analyze the following journal entry. Follow the intrusctions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{entry}',
+    inputVariables: ['entry'],
+    partialVariables: { format_instructions }
+  })
+
+  const input = await prompt.format({
+    entry: content
+  })
+
+  return input
+}
+
 const getOpenAIModel = () => {
   return new OpenAI({
     temperature: 0,
@@ -42,8 +60,9 @@ const getOpenAIModel = () => {
   })
 }
 
-export const analyze = async (propmt: string) => {
+export const analyze = async (content: string) => {
+  const input = await getPrompt(content)
   const model = getOpenAIModel()
-  const result = await model.call(propmt)
+  const result = await model.call(input)
   console.log({ result })
 }

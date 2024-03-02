@@ -16,8 +16,6 @@ async function getEntries() {
     }
   })
 
-  await analyze(`Today was a eh, ok day I guess. I found a new coffee shop that was cool but then I got a flat tire:)`)
-
   return entries
 }
 

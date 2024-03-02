@@ -64,5 +64,10 @@ export const analyze = async (content: string) => {
   const input = await getPrompt(content)
   const model = getOpenAIModel()
   const result = await model.call(input)
-  console.log({ result })
+  
+  try {
+    return parser.parse(result)
+  } catch (error) {
+    console.error('Failed to parse the output from the AI model.', error)
+  }
 }

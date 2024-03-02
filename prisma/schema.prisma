@@ -45,10 +45,7 @@ model Analysis {
   updatedAt DateTime @updatedAt
 
   entryId String
-  entry   CvEntry @relation(fields: [entryId], references: [id])
-
-  // score    Float
-  // feedback String @db.Text
+  entry   CvEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
 
   mood           String
   summary        String  @db.Text

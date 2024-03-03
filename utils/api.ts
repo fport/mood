@@ -6,7 +6,6 @@ export async function createNewEntry() {
   const res = await fetch(
     new Request(createURL('/api/journal'), {
       method: 'POST'
-      // body: JSON.stringify({}),
     })
   )
 
@@ -35,6 +34,25 @@ export async function updateEntry(id: string, content: any) {
       error: true,
       code: res.status,
       messageForUI: 'Failed to update entry',
+    }
+  }
+
+  const data = await res.json()
+  return data.data
+}
+
+export async function askQuestion(question: string) {
+  const res = await fetch(
+    new Request(createURL('/api/question'), {
+      method: 'POST',
+      body: JSON.stringify({ question }),
+    })
+  )
+
+  if (!res.ok) {
+    return {
+      error: true,
+      code: res.status,
     }
   }
 

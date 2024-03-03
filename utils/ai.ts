@@ -5,10 +5,15 @@
   Transformers: https://www.youtube.com/watch?v=5vcj8kSwBCY
  */
 
-import { z } from 'zod'
 import { OpenAI } from '@langchain/openai'
-import { StructuredOutputParser } from 'langchain/output_parsers'
 import { PromptTemplate } from 'langchain/prompts'
+import { loadQARefineChain } from 'langchain/chains'
+import { MemoryVectorStore } from 'langchain/vectorstores/memory'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+
+import { z } from 'zod'
+import { StructuredOutputParser } from 'langchain/output_parsers'
+import { Document } from 'langchain/document'
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -64,10 +69,31 @@ export const analyze = async (content: string) => {
   const input = await getPrompt(content)
   const model = getOpenAIModel()
   const result = await model.call(input)
-  
+
   try {
     return parser.parse(result)
   } catch (error) {
     console.error('Failed to parse the output from the AI model.', error)
   }
+}
+
+export const qa = async (question: string, entries: any) => {
+  const docs = entries.map(
+    (entry: any) =>
+      new Document({
+        pageContent: entry.content,
+        metadata: { source: entry.id, date: entry.createdAt }
+      })
+  )
+  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
+  const chain = loadQARefineChain(model)
+  const embeddings = new OpenAIEmbeddings()
+  const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+  const relevantDocs = await store.similaritySearch(question)
+  const res = await chain.call({
+    input_documents: relevantDocs,
+    question
+  })
+
+  return res.output_text
 }

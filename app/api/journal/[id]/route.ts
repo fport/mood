@@ -2,6 +2,7 @@ import { getUserFromClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextResponse } from 'next/server'
 import { analyze } from '@/utils/ai'
+import { revalidatePath } from 'next/cache'
 
 export const PATCH = async (request: any, { params }: { params: any }) => {
   const { content } = await request.json()
@@ -20,6 +21,7 @@ export const PATCH = async (request: any, { params }: { params: any }) => {
   })
 
   const analysis = await analyze(updatedEntry.content)
+
   const updated = await prisma.analysis.upsert({
     where: {
       entryId: updatedEntry.id
@@ -32,6 +34,6 @@ export const PATCH = async (request: any, { params }: { params: any }) => {
     // @ts-ignore
     update: analysis
   })
-  console.log(updated)
-  return NextResponse.json({ data: updatedEntry })
+
+  return NextResponse.json({ data: {...updatedEntry, analysis: updated} })
 }

@@ -19,9 +19,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  clerkId String    @unique
-  email   String    @unique
-  entries CvEntry[]
+  clerkId  String     @unique
+  email    String     @unique
+  entries  CvEntry[]
+  analyses Analysis[]
 }
 
 model CvEntry {
@@ -47,12 +48,16 @@ model Analysis {
   entryId String
   entry   CvEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
   mood           String
   summary        String  @db.Text
   color          String
   negative       Boolean
   subject        String
-  sentimentScore Float
+  sentimentScore Float   @default(0)
 
   @@unique([entryId])
+  @@index([userId])
 }

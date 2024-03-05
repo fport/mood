@@ -26,7 +26,7 @@ const createNewUser = async () => {
 
 const NewUser = async () => {
   await createNewUser()
-  return <div>...loading</div>
+  return <div className="bg-black">...loading</div>
 }
 
 export default NewUser

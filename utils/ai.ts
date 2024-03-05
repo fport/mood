@@ -6,7 +6,7 @@
  */
 
 import { OpenAI } from '@langchain/openai'
-import { PromptTemplate } from 'langchain/prompts'
+import { PromptTemplate } from '@langchain/core/prompts'
 import { loadQARefineChain } from 'langchain/chains'
 import { MemoryVectorStore } from 'langchain/vectorstores/memory'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'

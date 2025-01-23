@@ -15,7 +15,7 @@
     "@prisma/client": "^5.10.2",
     "langchain": "^0.1.21",
     "next": "14.1.0",
-    "react": "^18",
+    "react": "^18.3.1",
     "react-autosave": "^0.4.4",
     "react-dom": "^18",
     "recharts": "^2.12.2",

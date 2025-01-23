@@ -19,7 +19,7 @@
     "react-autosave": "^0.4.4",
     "react-dom": "^18",
     "recharts": "^2.12.2",
-    "zod": "^3.22.4"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",

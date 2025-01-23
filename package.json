@@ -14,7 +14,7 @@
     "@langchain/openai": "^0.0.14",
     "@prisma/client": "^5.10.2",
     "langchain": "^0.1.21",
-    "next": "14.1.0",
+    "next": "14.2.22",
     "react": "^18",
     "react-autosave": "^0.4.4",
     "react-dom": "^18",
